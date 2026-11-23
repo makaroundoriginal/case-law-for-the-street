@@ -1,0 +1,32 @@
+{
+  "background_color": "#0a0d12",
+  "description": "Quick-reference case law cards for officers \u2014 works offline once opened.",
+  "display": "standalone",
+  "icons": [
+    {
+      "purpose": "any",
+      "sizes": "192x192",
+      "src": "icon-192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "icon-512.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "icon-maskable-512.png",
+      "type": "image/png"
+    }
+  ],
+  "id": "./index.html",
+  "name": "Case Law for the Street",
+  "orientation": "portrait",
+  "scope": "./",
+  "short_name": "Case Law",
+  "start_url": "./index.html",
+  "theme_color": "#0a0d12"
+}

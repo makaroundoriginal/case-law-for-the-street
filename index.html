@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0d12">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Case Law">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAEa0lEQVR4nO3dQVLbQBRFUZFiRBWTrCDrygKzrqwiUzJyBZQ22JbU/VvvnBkJ2Ipat7+AgJ9eXr+/LRDq2+gDgJEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQLTn0QeQ6vevPx/e/vHzZdCRZHvy8wB9rS/8NSH05Raoo68u/lvfh/0IgGgC6OSend0U6EcARBMA0QRANAF0cs+XN30ptB8BEE0AHd2ys9v9+/Kd4EFaX+p08fdnAgziYq9BAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQrexvhfALYs+l6i8BKDkBXPznU3VNSwYAvZQLoOpOwXYV13aKF8mrev+41dlfKK/iBb9WagK8P2HvL4YZTiQfzbKWpQKA3soE0NoxKu8cXDfTWpYJAEYoEcC1+8X125V2DtpmW8sSAcAoAiDa8AA+G5mtP68yOvnfjGs5PAAYaWgAt+wYrb+vsHPw0axraQIQbVgA9+wYrfcbvXPwz8xraQIQTQBEGxLAIyOz9f5ug8abfS1NAKJ1D2DLjtH6OFNgnDOspQlAtK4B7LFjtD7eFOjvLGtpAhCtWwB77hitxzEF+jnTWpoARBMA0boEcMTIbD2e26DjnW0tTQCiHR7AkTtG63FNgeOccS1NAKIdGkCPHaP1+KbA/s66liYA0Q4LoOeO0XoeU2A/Z15LE4BoAiDaIQGMGJmt53MbtN3Z19IEINruAYzcMVrPawo8LmEtTQCi7RpAhR2j9fymwP1S1tIEIJoAiLZbAJVG5oXboMckraUJQLRdAqi4Y1yYAvdJW0sTgGibA6i8Y1yYArdJXEsTgGhPL6/f3x794Jl30wo73Pr8jTym1LU0AYi2KYAKu+gjZj3uI816TrYe9/PoA6COxLV0C0S0zROg0idy18xwjBXMcJ72PkYTgGibA1gXWO3LaTPsalUkruXhPxQ/UpXjmFmVc1j6h+JbJY4+ca3nt/t/LW0tN30neO3aiep54VU4hltVvj2rcB57HMOuASzL17vFESdwxHPuoXIAy5KxlrsHsCz3jcxH/kFHP34v1QNYlvOv5SEBXIy8d6x4Ma3NEMDFWddy8zfCPnM58J4nr/JFNLOzruWhAVwc/QMpLvp+zraWXQJ4b49vtrjgazjDWnYPYG30CWA/M66l/wtENAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0Q59oezZjXxx6D3N+OJ1vZgARBMA0QRANJ8DEM0EIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKL9BX0GruGevpfBAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAEa0lEQVR4nO3dQVLbQBRFUZFiRBWTrCDrygKzrqwiUzJyBZQ22JbU/VvvnBkJ2Ipat7+AgJ9eXr+/LRDq2+gDgJEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQLTn0QeQ6vevPx/e/vHzZdCRZHvy8wB9rS/8NSH05Raoo68u/lvfh/0IgGgC6OSend0U6EcARBMA0QRANAF0cs+XN30ptB8BEE0AHd2ys9v9+/Kd4EFaX+p08fdnAgziYq9BAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQrexvhfALYs+l6i8BKDkBXPznU3VNSwYAvZQLoOpOwXYV13aKF8mrev+41dlfKK/iBb9WagK8P2HvL4YZTiQfzbKWpQKA3soE0NoxKu8cXDfTWpYJAEYoEcC1+8X125V2DtpmW8sSAcAoAiDa8AA+G5mtP68yOvnfjGs5PAAYaWgAt+wYrb+vsHPw0axraQIQbVgA9+wYrfcbvXPwz8xraQIQTQBEGxLAIyOz9f5ug8abfS1NAKJ1D2DLjtH6OFNgnDOspQlAtK4B7LFjtD7eFOjvLGtpAhCtWwB77hitxzEF+jnTWpoARBMA0boEcMTIbD2e26DjnW0tTQCiHR7AkTtG63FNgeOccS1NAKIdGkCPHaP1+KbA/s66liYA0Q4LoOeO0XoeU2A/Z15LE4BoAiDaIQGMGJmt53MbtN3Z19IEINruAYzcMVrPawo8LmEtTQCi7RpAhR2j9fymwP1S1tIEIJoAiLZbAJVG5oXboMckraUJQLRdAqi4Y1yYAvdJW0sTgGibA6i8Y1yYArdJXEsTgGhPL6/f3x794Jl30wo73Pr8jTym1LU0AYi2KYAKu+gjZj3uI816TrYe9/PoA6COxLV0C0S0zROg0idy18xwjBXMcJ72PkYTgGibA1gXWO3LaTPsalUkruXhPxQ/UpXjmFmVc1j6h+JbJY4+ca3nt/t/LW0tN30neO3aiep54VU4hltVvj2rcB57HMOuASzL17vFESdwxHPuoXIAy5KxlrsHsCz3jcxH/kFHP34v1QNYlvOv5SEBXIy8d6x4Ma3NEMDFWddy8zfCPnM58J4nr/JFNLOzruWhAVwc/QMpLvp+zraWXQJ4b49vtrjgazjDWnYPYG30CWA/M66l/wtENAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0Q59oezZjXxx6D3N+OJ1vZgARBMA0QRANJ8DEM0EIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKL9BX0GruGevpfBAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAPtUlEQVR4nO3dQVLcWhZFUfHDLSLoMAKPywNkXIyCLtVwEcYYEilT0nv3nrW6VVGVP6V3ciPj/Hf3D4+vCwAQ5b/RLwAAOJ8AAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAj0Y/QLAM7z/PRy8T//+ev+pFcCjHZ3//D4OvpFAMf67oP/IyEA/QkAaGzrB/9HQgD68jsA0NStH/57/W8AcxIA0NCeH9wiAHoSANDMER/YIgD6EQDQyJEf1CIAehEA0MQZH9AiAPoQAAAQSABAA2f+ZO4pAPQgAAAgkACA4kb8RO4pANQnAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJACju56/7iP9PYF8CAAACCQBo4MyfyP30Dz0IAAAIJACgiTN+MvfTP/QhAKCRIz+gffhDLwIAmjnig9qHP/QjAKChPT+wffhDTwIAmtrjg9uHP/R1d//w+Dr6RQDHen562fTf98EP/QkACPJdCPjghxwCAEJ4CgC853cAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAh0d//w+Dr6RfCv56eX0S8BYBc/f92Pfgl8whMAAAgkAAAgkACYiMf+AJxFAEzm+elFCABt2bd5/Bj9AvjNoQC6sm9z8gQAgFMJgjkIgAk4DACcTQAAcDo/+IwnAAZzCAAYQQAAMIQfgMYSAAO5+QEYxV8DLMz3a7PF1uB0f7HWLT/MPD+9uNcG8QQAAAIJgEE8/gc6sGV1CYDCHDygA1s2hgAYwM0OdGDLahMAk1r7SzEOIDAzWzYvAXCyLTe534wFZmXL6hMAE9p6WJQzMCNbNjcBcKJrbm7lDMzGlvUgACZz7SFRzsBMbNn8BEAByhnowJbNRQCcZE3VOhzA7GxZHwKgiDUHyqMzYHa2bB4C4ARuZqADW9aLAJjEXo/MHFBgJFtWhwA42J43sT9XA0axZf0IgAnsfRiUMzCCLatFABzoiJtXOQNns2U9CYDBjjoEyhk4ky2rRwAUpJyBDmzZWALgIL4sA+jAlvUlAIryZRpAB7ZsHAFwADcr0IEt600ADHLWIzMHGDiSLatLAOzszJvUn7sBR7Fl/QmAAc6+2ZUzcARbVpsA2NGIm1M5A3uzZRkEwMlG3eTKGdiTLatPADSgnIEObNm5BMBOfFkG0IEtyyEAmvBlGkAHtuw8AmAHbkagA1uWRQCcZJZHZg44cAtb1ocAuNFMN+EsBxOox5blEQAnmO1mnumgA3XYsl4EwA1mvPlmO6DA/GxZJgFwsFlv4hkPPDAvW9aPAGho1oMKsIUtO5YAuJIvywA6sGW5BEBTvkwD6MCWHUcAXMHNBnRgy7IJgINUeWRmAIBLbFlfAmCjSjdZlYMLnM+WIQAOUO1mrTQEwHlsWW8CYIOKN1e1Awwcz5axLAJgd1Vv0oqDABzHlvUnAAJUPcgA79myfQmAlXxZBtCBLeONAAjhyzSADmzZfgTACm4moANbxnsCYCddHpkZCMhmy3IIgG90uom6HGxgO1vGRwJgB91uxk5DAaxny7IIgAs63jzdDjjwPVvGZwTAjbrehB0HA/iaLcsjAAJ1PehAFlt2GwHwBV+WAXRgy/iKAAjlyzSADmzZ9QTAJ9wsQAe2jEsEwJVSHpkZEOjNluUSAB8k3SQpBx8S2TK+IwCukHazJQ0JJLFl2QRAuLQBAHqyZdsJgHf8dRmgA1vGGgIAf40GaMGWbSMA/s9NAXRgy1hLAGyQ/sjMsEAPtsyWLYsAWJbFzbAsBgE6sGW2bAsBsJKb6jcDA7XZst9smQBwE7xjGKAuW/aHLVsnPgDWcDP9zdBATbbsb+lbJgD4i4EAOrBl34sOAF+WAXRgy7hGdADwOV+mAXRgyy6LDYDkiw70Ycu4VmwArOGR2WWGB2qwZZelbllkAKRe7C0MBszPln3Pln0tMgDWcNOsY4BgbrZsncQtiwuAxIt8LcMB87Jl69myz8UFwBpulm0MEczJlm2TtmUCgIsMCNCBLftXVAD4sgygA1vGHqICgOv4Mg2gA1v2t5gASLqoQF+2jL3EBMAaHpndxjDBHGzZbVK2LCIAUi7mkQwKjGfLbmfL/ogIgDXcFPswUDCWLdtHwpa1D4CEi3gWwwLj2LL92LLf2gfAGm6GfRkqGMOW7av7lgkANjEwQAe2rHkA+LIMoANbxhFaBwDH8GUaQAfpW9Y2ADpfNCCHLeMobQNgDY/MjmW44By27Fhdt6xlAHS9WDMxOHA8W3a85C1rGQBrJF/0MxkwOJYtO0fHLWsXAB0v0qwMDxzHlp0ndcvaBcAaqRd7FEMGx7Bl5+q2ZZEBwH4MENBB4pa1CgBflgF0YMs4Q6sAYIz0L9MAekjbsjYB0OmiALlsGWdpEwBreGQ2lmGDfdiysbpsWYsA6HIxKjNIcDtbNl7SlrUIgDWSLurMDBzcxpbNocOWlQ+ADhehC8ME17Nl80jZsvIBsEbKxazC0MF1bNlcqm9ZRABwHgMFdJCwZaUDwJdlAB3YMkYoHQDMKe3LNICeum9Z2QCo/KYDvLFljFI2ANbwyGxuhg/WsWVzq7plJQOg6pudxGDB92zZ/DpvWckAWKPzRevEAMJltqyGiltWLgAqvsmpDBd8zZbV0XXLygXAGl0vVleGED5ny2qptmUtA4B5GDCgg45bVioAfFkG0IEtYwalAoCaun+ZBpCh25aVCYBKbyrAV2wZsygTAGt4ZFabYYTfbFltVbasRABUeTP5mkEDW9ZBpy0rEQBrdLooyQwk6WxZDxW27MfoF/CdtW9ihTcbyGXLmE2bJwD0YQCBDmbfsukD4Oeve4/EgPJsGbOZPgDeODgZjCTdub8zVNiy6X8HgAyzHxSANSptWZknAADAfgQAAAQSAAAQqNTvAFT6sxWAr9gyZuAJAAAEEgAAEKjUHwGs/VYlj9fm4ZrBv5yLejpeM08AACCQAACAQC0DYPZ/AUMK1wFu4wzNoet1KBUAlf5shfVcV9K453uqdl1LBcAWXYutCu8/7MNZGqvz+982AACAr5ULgC2PWDqX28y2vO/VHpnBXmzZ/LpvWbkA2MrBOZf3G47hbJ0r4f0uGQBbSyvhQs5g6/tcsZhhT7ZsTilbdnf/8Pg6+kVc65rDUPVCzcx1qCFl1CpyhuaQdh1KPgG4hYLel/cTxnD29pX4fpZ+ArAst120yuU2mve9Hk8A5uZMjZH8vpcPgGW5vdyqX8Qzea/rEgDzc77O471uEgDLss/jmw4X9Cje3/oEQA3O2rG8v3+0CYBl2e/PcLpc3D14T/sQAHU4d/vznv6rVQAsy/6/yNHpYq/lPexJANTiHN7Oe3hZuwB4c8RvdHa7+O95v/oTADU5m9t4v9ZrGwDLcvxf66h8U3hv8giAupzXr3lvrtc6AJbl/L/bOePN4j1gWQRAdc6x92Bv7QPgzSxf8nDEDdX5n439CIAeOp/3zv9sM4oJgDez3GCdpByW6gRAL7Zsf2n3/I/RL+BsbxfY4bld2mGBmdiy/aRuWVwAvHF4rpd6WGBGtux66VsWGwBvHJ710g8LzMyWrWfLfosPgDfvbwgH6A8HBWqxZZ+zZf8SAJ9IP0AOCvRgy2zZJQLgGykHyEGB3mwZHwmADT7eWJUPkUMCuWwZyyIAbvLZjTfjQXJAgEtsWSYBsLPvblD/ogqgAlvWnwA4mRsc6MCW1fff6BcAAJxPAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAoLv7h8fX0S8CzvT89DL6JTChn7/uR78EOJUnAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgfy7AAAgkCcAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACB/gdaWExju8RmkAAAAABJRU5ErkJggg==">
+<title>Case Law for the Street</title>
+<style>
+  :root{
+    --bg:#0a0d12;
+    --surface:#141a22;
+    --surface2:#1a222e;
+    --border:#334155;
+    --text:#f8fafc;
+    --muted:#cbd5e1;
+    --accent:#eab308;
+    --accent-text:#0a0d12;
+    --can:#4ade80;
+    --cannot:#f87171;
+    --watch:#fbbf24;
+    --link:#7dd3fc;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;font-size:17px}
+  a{color:var(--link)}
+  button,input{font:inherit}
+  /* GATE */
+  #gate{min-height:100dvh;display:flex;align-items:flex-start;justify-content:center;padding:20px 16px 40px}
+  .gate-card{max-width:640px;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 20px 28px;margin-top:12px}
+  .gate-kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 8px}
+  .gate-card h1{font-size:28px;line-height:1.2;margin:0 0 4px}
+  .gate-sub{color:var(--muted);margin:0 0 20px;font-size:16px}
+  .gate-text{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:16.5px;line-height:1.65}
+  .gate-text p{margin:0}
+  #acceptBtn{margin-top:22px;width:100%;min-height:56px;border:0;border-radius:12px;background:var(--accent);color:var(--accent-text);font-weight:800;font-size:19px;cursor:pointer;padding:14px 16px}
+  #acceptBtn:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .gate-note{color:var(--muted);font-size:14px;text-align:center;margin:12px 0 0}
+  /* APP */
+  #app{display:none;max-width:760px;margin:0 auto;padding:0 14px 48px}
+  header.app-head{padding:22px 2px 14px}
+  header.app-head .pub{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 6px}
+  header.app-head h1{font-size:30px;line-height:1.15;margin:0}
+  header.app-head p.lede{color:var(--muted);margin:10px 0 0;font-size:16.5px;max-width:56ch}
+  .search-wrap{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 0 10px}
+  label.search-label{display:block;font-weight:700;font-size:15px;margin-bottom:8px}
+  #search{width:100%;min-height:58px;border-radius:12px;border:2px solid var(--border);background:var(--surface);color:var(--text);padding:14px 16px;font-size:19px}
+  #search::placeholder{color:#94a3b8}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .chip{min-height:44px;padding:10px 16px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font-weight:600;font-size:15.5px;cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-text);border-color:var(--accent)}
+  .count-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:16px 2px 10px}
+  .count-row h2{font-size:19px;margin:0}
+  #count{color:var(--muted);font-size:15px;white-space:nowrap}
+  /* CARDS */
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:14px;overflow:hidden}
+  .card summary{list-style:none;cursor:pointer;padding:18px 18px 16px;min-height:44px}
+  .card summary::-webkit-details-marker{display:none}
+  .card summary:hover{background:var(--surface2)}
+  .card-top{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .tag{font-size:12.5px;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+  .tag.cat{color:var(--accent);border-color:#713f12;background:#1c1917}
+  .case-name{font-size:21px;line-height:1.25;margin:0;font-weight:800}
+  .cite{color:var(--muted);font-size:15.5px;margin:4px 0 0}
+  .rule-preview{margin:12px 0 0;font-size:17.5px;line-height:1.5}
+  .rule-preview strong{color:var(--accent)}
+  .expand-hint{margin:12px 0 0;font-size:14.5px;color:var(--link);font-weight:600}
+  .card[open ] .expand-hint .open-txt{display:none}
+  .card:not([open]) .expand-hint .close-txt{display:none}
+  .card-body{border-top:1px solid var(--border);padding:18px}
+  .card-body h3{font-size:15px;letter-spacing:.06em;text-transform:uppercase;margin:22px 0 8px}
+  .card-body h3:first-child{margin-top:0}
+  .card-body h3 .sub{text-transform:none;letter-spacing:0;font-weight:600;color:var(--muted);font-size:14.5px}
+  .rule-big{font-size:20px;line-height:1.5;font-weight:700;margin:0;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+  ul.can,ul.cannot{margin:0;padding:0;list-style:none}
+  ul.can li,ul.cannot li{padding:10px 12px 10px 40px;position:relative;border-radius:8px;margin-bottom:8px;font-size:16.5px;background:var(--surface2)}
+  ul.can li::before{content:"✓";position:absolute;left:12px;top:9px;color:var(--can);font-weight:900;font-size:18px}
+  ul.cannot li::before{content:"✕";position:absolute;left:13px;top:9px;color:var(--cannot);font-weight:900;font-size:17px}
+  .watch-box{background:#1c1917;border:1px solid #713f12;border-radius:10px;padding:12px 14px;font-size:16.5px}
+  .watch-box p{margin:0}
+  .opinion-link{display:inline-flex;align-items:center;min-height:48px;padding:12px 18px;border-radius:10px;background:var(--accent);color:var(--accent-text)!important;font-weight:800;text-decoration:none;font-size:16.5px;margin-top:4px}
+  .card-foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--border);font-size:13.5px;color:var(--muted);line-height:1.5}
+  .report-link{display:inline-block;padding:10px 4px;min-height:44px;font-size:14.5px}
+  #empty{display:none;background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius);padding:28px 20px;text-align:center;color:var(--muted);font-size:17px}
+  /* REQUEST */
+  .request{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;margin-top:28px}
+  .request h2{font-size:21px;margin:0 0 8px}
+  .request p{color:var(--muted);margin:0 0 14px}
+  .request a.btn{display:inline-flex;align-items:center;min-height:50px;padding:12px 18px;border-radius:10px;border:1.5px solid var(--accent);color:var(--accent);font-weight:700;text-decoration:none;margin:0 8px 8px 0}
+  footer.app-foot{margin-top:28px;color:var(--muted);font-size:14px;text-align:center;padding:0 8px}
+  /* OFFLINE */
+  #offlineBar{position:sticky;top:0;z-index:50;background:#713f12;color:#fef3c7;font-weight:700;font-size:15.5px;text-align:center;padding:12px 16px;line-height:1.45}
+  #offlineBar[hidden]{display:none}
+  #saveState{display:none;margin:12px 0 0;font-size:14.5px;font-weight:700;color:var(--can)}
+  #saveState.show{display:block}
+  #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:60;max-width:min(92vw,560px);background:#1c1917;color:#fef3c7;border:1.5px solid #713f12;border-radius:12px;padding:14px 18px;font-size:16px;font-weight:600;line-height:1.5;box-shadow:0 10px 30px rgba(0,0,0,.55)}
+  #toast[hidden]{display:none}
+  .install{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;margin-top:14px}
+  .install h2{font-size:21px;margin:0 0 8px}
+  .install p{color:var(--muted);margin:0 0 10px}
+  .install p:last-child{margin-bottom:0}
+  .install strong{color:var(--text)}
+  /* BLOG BUTTON */
+  .blog-btn{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:68px;padding:16px 18px;margin:4px 0 6px;border-radius:12px;background:var(--accent);color:var(--accent-text)!important;text-decoration:none;border:1.5px solid var(--accent)}
+  .blog-btn:active{background:#facc15}
+  .blog-btn-title{font-size:20px;font-weight:800;line-height:1.25;display:flex;align-items:center;gap:8px}
+  .blog-btn-title .ext{font-size:17px;font-weight:800}
+  .blog-btn-sub{font-size:15px;font-weight:600;line-height:1.35;color:#1c1917}
+  @media (min-width:640px){
+    header.app-head h1{font-size:36px}
+    .gate-card h1{font-size:32px}
+    .case-name{font-size:23px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div id="offlineBar" role="status" hidden>You’re offline — showing your saved copy. Full opinions need signal.</div>
+<div id="toast" role="alert" hidden></div>
+
+<!-- DISCLAIMER GATE -->
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gate-card">
+    <p class="gate-kicker">Mak Around Original</p>
+    <h1 id="gateTitle">Case Law for the Street</h1>
+    <p class="gate-sub">Quick-reference case law for officers — please read this first.</p>
+    <div class="gate-text">
+      <p>This app is a quick-reference educational tool published by Mak Around Original. It summarizes case law in plain language for general information only. It is NOT legal advice, does not create an attorney-client relationship, and is not a substitute for your agency's policy, your state law, or guidance from your agency's legal advisor or prosecutor. Case law varies by state and federal circuit and changes over time. Your agency policy may be stricter than the law — policy controls your conduct. Every card shows the date it was last verified; verify critical decisions against the full opinion and current law. Nothing in this app overrides officer safety or your judgment in a rapidly evolving situation.</p>
+    </div>
+    <button id="acceptBtn" type="button">I understand</button>
+    <p class="gate-note">Tap “I understand” to open the 25 cards.</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header class="app-head">
+    <p class="pub">Mak Around Original</p>
+    <h1>Case Law for the Street — Mak Around Original</h1>
+    <p class="lede">One-screen cards built for the roadside. Search by case name, topic, or the plain question you’re asking in the car — then check the full opinion when it matters.</p>
+    <p id="saveState" aria-live="polite"></p>
+  </header>
+
+  <a id="blogBtn" class="blog-btn" href="https://makaroundoriginal.blogspot.com" target="_blank" rel="noopener" aria-label="Mak Around Original Blog — full breakdowns, videos and new posts (opens in a new tab)">
+    <span class="blog-btn-title">Mak Around Original Blog <span class="ext" aria-hidden="true">↗</span></span>
+    <span class="blog-btn-sub">Full breakdowns, videos &amp; new posts</span>
+  </a>
+
+  <div class="search-wrap">
+    <label class="search-label" for="search">Search case law</label>
+    <input id="search" type="search" inputmode="search" autocomplete="off" placeholder="Try “frisk”, “Riley”, or “can I get the passenger out too?”" aria-describedby="count">
+    <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+  </div>
+
+  <div class="count-row">
+    <h2>Cards A–Z</h2>
+    <span id="count" aria-live="polite"></span>
+  </div>
+
+  <main id="list" aria-label="Case law cards"></main>
+  <div id="empty" role="status">No card matches — try a case name, a topic like ‘frisk’, or a plain question.</div>
+
+  <section class="request" aria-labelledby="reqH">
+    <h2 id="reqH">Request a case / Report an error</h2>
+    <p>Don’t see the case you need, or spot something that looks wrong? Bring it to Mak Around Original — use the Mak Around Original Blog button at the top of this app, or send your request or error report through the Mak Around Original Facebook Page.</p>
+    <p>Cases are picked by Chris and verified against the actual court opinion before anything is added or changed — nothing goes into this library unverified.</p>
+  </section>
+
+  <section class="install" aria-labelledby="instH">
+    <h2 id="instH">Put it on your home screen</h2>
+    <p><strong>Android (Chrome):</strong> tap the ⋮ menu, then <strong>Add to Home screen</strong> / <strong>Install app</strong>.</p>
+    <p><strong>iPhone / iPad (Safari):</strong> tap the Share button, then <strong>Add to Home Screen</strong>.</p>
+    <p>Open it once while you have signal and it saves a copy on this device — after that it opens and searches with no signal at all. When you’re back online, it picks up corrections and new cards on its own.</p>
+  </section>
+
+  <footer class="app-foot">
+    <p>Cards state what the courts held. They do not direct your decision on any stop — agency policy and the facts in front of you control.</p>
+    <p id="footSave"></p>
+  </footer>
+</div>
+
+<script>
+var FOOTER = "Quick reference only — not legal advice. Check your state law and agency policy. Last verified 2026-11-10.";
+var CARDS = [
+{name:"Pennsylvania v. Mimms",cite:"434 U.S. 106",year:"1977",cat:"Traffic Stops",terms:["order driver out","step out of the car","exit order","get out of the vehicle","you can't order me out","you cant order me out"],rule:"On a lawful traffic stop, an officer may order the driver out of the car — no additional suspicion or separate justification needed.",can:["Order the driver out as a routine practice on any lawful stop","conduct the stop face-to-face outside the vehicle."],cannot:["Frisk the driver — that needs separate Terry facts (in Mimms, a visible bulge)","search the driver or the car","extend the stop beyond its mission","use Mimms to save a stop that was unlawful to begin with."],watch:"Passengers are covered by Maryland v. Wilson, not Mimms. How long a stop may last is Rodriguez.",opinion:"https://www.law.cornell.edu/supremecourt/text/434/106"},
+{name:"Maryland v. Wilson",cite:"519 U.S. 408",year:"1997",cat:"Traffic Stops",terms:["order passenger out","passenger exit","get the passenger out","can I get the passenger out too","passenger out of the car"],rule:"On a lawful traffic stop, an officer may order passengers out of the car too — no additional suspicion needed.",can:["Order any passenger out during a lawful stop, as a routine practice."],cannot:["Frisk or search a passenger without separate legal justification","detain a passenger beyond the stop's lawful scope and duration."],watch:"The driver rule is Mimms (1977); Wilson extends it to passengers. A passenger is seized by the stop itself — see Brendlin.",opinion:"https://www.law.cornell.edu/supremecourt/text/519/408"},
+{name:"Rodriguez v. United States",cite:"575 U.S. 431",year:"2015",cat:"Traffic Stops",terms:["extend a stop","prolong stop","dog sniff during stop","stop mission","how long can a stop last","wait for K-9","wait for k9","dog sniff"],rule:"A stop may last no longer than needed to complete its mission — a K-9 sniff or other check unrelated to the mission cannot extend the stop unless there is reasonable suspicion or consent.",can:["Conduct ordinary mission checks (license, warrant check, inspection) during the stop","run a K-9 sniff if it does not prolong the stop","extend the stop if reasonable suspicion develops."],cannot:["Hold a driver past the mission's completion to wait for a dog or run unrelated checks, without reasonable suspicion or consent."],watch:"Rodriguez is the trap next to Mimms/Wilson — you can order occupants out, but the clock is limited to the stop's mission.",opinion:"https://www.law.cornell.edu/supremecourt/text/575/431"},
+{name:"Arizona v. Johnson",cite:"555 U.S. 323",year:"2009",cat:"Traffic Stops",terms:["frisk passenger","pat down passenger","passenger in traffic stop"],rule:"During a lawful traffic stop, an officer may frisk a driver or passenger if the officer reasonably suspects that person is armed and dangerous; the stop itself lawfully seizes everyone in the vehicle until it ends.",can:["Frisk an occupant during the stop when specific facts support that the person may be armed and dangerous."],cannot:["Frisk automatically just because a stop occurred — the frisk still needs its own reasonable suspicion that the person is armed and dangerous."],watch:"Pairs with Terry. The exit order (Mimms/Wilson) and the frisk are separate justifications — do not merge them.",opinion:"https://www.law.cornell.edu/supremecourt/text/555/323"},
+{name:"Whren v. United States",cite:"517 U.S. 806",year:"1996",cat:"Traffic Stops",terms:["pretext stop","officer motive","real reason for stop"],rule:"If an officer has probable cause that a traffic violation occurred, the stop is lawful regardless of the officer's subjective motive for making it.",can:["Make a stop supported by probable cause of a traffic offense, even if investigating something else is also on the officer's mind."],cannot:["Use Whren without an actual, objectively valid basis for the stop — motive does not matter, but probable cause must exist."],watch:"Whren does not authorize extending the stop — see Rodriguez for duration.",opinion:"https://www.law.cornell.edu/supremecourt/text/517/806"},
+{name:"Brendlin v. California",cite:"551 U.S. 249",year:"2007",cat:"Traffic Stops",terms:["passenger seized","passenger rights in stop","can passenger challenge stop","passenger walk away"],rule:"When a vehicle is stopped, a passenger is seized under the Fourth Amendment just as the driver is, and may challenge the stop's legality.",can:["Treat all occupants as lawfully detained for the duration of a lawful stop (subject to agency policy)."],cannot:["Assume a passenger is free to leave during the stop, or that only the driver is seized."],watch:"Because passengers are seized, an unlawful stop affects their evidence too.",opinion:"https://www.law.cornell.edu/supremecourt/text/551/249"},
+{name:"Terry v. Ohio",cite:"392 U.S. 1",year:"1968",cat:"Stops & Frisks",terms:["terry stop","frisk","pat down","stop and frisk","reasonable suspicion","investigative stop"],rule:"An officer may briefly stop a person on reasonable suspicion of criminal activity, and frisk for weapons if reasonably suspecting the person is armed and dangerous.",can:["Conduct a brief investigative stop on specific, articulable facts","pat down outer clothing for weapons when armed-and-dangerous suspicion exists."],cannot:["Frisk for evidence or contraband — a Terry frisk is for weapons only","stop or frisk on a hunch alone, without specific facts."],watch:"Reach in a frisk is limited by Minnesota v. Dickerson (plain feel). Flight and place can add facts — see Wardlow.",opinion:"https://www.law.cornell.edu/supremecourt/text/392/1"},
+{name:"Hiibel v. Sixth Judicial District Court of Nevada",cite:"542 U.S. 177",year:"2004",cat:"Stops & Frisks",terms:["show ID","show id","identify yourself","I don't have to show ID","i don't have to show id","name during stop","identification law"],rule:"Where a state stop-and-identify law applies, a person lawfully stopped on reasonable suspicion may be required to give their name; the request must be reasonably related to the stop's circumstances.",can:["Require a name during a lawful Terry stop in a state with a stop-and-identify statute (check your state law)."],cannot:["Demand identification under Hiibel where no state law authorizes it, or during a stop that is not lawful."],watch:"Hiibel is state-law dependent — whether YOU can demand ID depends on your state's statute.",opinion:"https://www.law.cornell.edu/supremecourt/text/542/177"},
+{name:"Minnesota v. Dickerson",cite:"508 U.S. 366",year:"1993",cat:"Stops & Frisks",terms:["plain feel","feel contraband frisk","squeeze pocket"],rule:"During a lawful Terry frisk, if an object's identity as contraband is immediately apparent from touch — without further squeezing or manipulation — it may be seized under the plain-feel doctrine.",can:["Seize contraband whose identity is immediately apparent during a lawful frisk for weapons."],cannot:["Squeeze, slide, or manipulate an object to figure out what it is — that goes beyond a weapons frisk."],watch:"The identity must be immediately apparent, not discovered by exploring.",opinion:"https://www.law.cornell.edu/supremecourt/text/508/366"},
+{name:"Illinois v. Wardlow",cite:"528 U.S. 124",year:"2000",cat:"Stops & Frisks",terms:["running from police","headlong flight","high crime area","unprovoked flight","he ran","flight"],rule:"Unprovoked, headlong flight in a high-crime area can give reasonable suspicion for a Terry stop — flight is not a mere refusal to cooperate.",can:["Consider headlong, unprovoked flight, together with the area and other facts, as part of reasonable suspicion."],cannot:["Treat flight alone, in isolation, as automatic proof of criminal activity."],watch:"A person may refuse a consensual encounter and walk away; Wardlow is about evasive, headlong flight, not calmly leaving.",opinion:"https://www.law.cornell.edu/supremecourt/text/528/124"},
+{name:"Florida v. J.L.",cite:"529 U.S. 266",year:"2000",cat:"Stops & Frisks",terms:["anonymous tip gun","tip about a gun","can I frisk on a tip","unnamed caller"],rule:"An anonymous tip that a person has a gun, without more, does not give reasonable suspicion to stop and frisk that person — there is no firearm exception to Terry.",can:["Investigate the tip further to develop reasonable suspicion","act on a tip that shows reliability."],cannot:["Stop and frisk solely on a bare, anonymous gun tip with no indicia of reliability."],watch:"Contrast Navarette — a 911 call about dangerous driving with eyewitness detail can carry enough reliability.",opinion:"https://www.law.cornell.edu/supremecourt/text/529/266"},
+{name:"Navarette v. California",cite:"572 U.S. 393",year:"2014",cat:"Stops & Frisks",terms:["911 tip stop","drunk driver tip","anonymous caller DUI","reckless driving call"],rule:"A 911 call reporting specific dangerous driving, from an eyewitness caller who can be identified/traced, can provide reasonable suspicion for a traffic stop.",can:["Stop a vehicle when a sufficiently reliable tip describes dangerous driving in detail (vehicle, plate, location, behavior)."],cannot:["Treat every anonymous tip as reliable — contrast Florida v. J.L."],watch:"The Court pointed to 911 traceability and the caller's eyewitness account of ongoing dangerous conduct.",opinion:"https://www.law.cornell.edu/supremecourt/text/572/393"},
+{name:"Heien v. North Carolina",cite:"574 U.S. 54",year:"2014",cat:"Stops & Frisks",terms:["mistake of law","wrong about the law stop","reasonable mistake","one brake light"],rule:"Reasonable suspicion can rest on an officer's reasonable mistake of law — a stop based on a reasonable, though mistaken, reading of a statute can be lawful.",can:["Rely on a reasonable interpretation of an unclear law when forming reasonable suspicion."],cannot:["Treat any mistake of law as excused — the mistake must be objectively reasonable."],watch:"Heien involved a genuinely ambiguous statute. It is not a license to stop on laws that do not exist.",opinion:"https://www.law.cornell.edu/supremecourt/text/574/54"},
+{name:"Kansas v. Glover",cite:"589 U.S. 376",year:"2020",cat:"Stops & Frisks",terms:["revoked license stop","owner driving","registered owner suspended","run the plate stop"],rule:"Running a plate and learning the registered owner's license is revoked can give reasonable suspicion that the owner is driving — supporting a stop, using common sense and the totality of facts.",can:["Stop when plate information plus common-sense inferences support that a revoked owner is driving, absent information to the contrary."],cannot:["Ignore facts that rebut the inference (for example, the driver visibly does not match the owner)."],watch:"Glover depends on no contrary information being present.",opinion:"https://www.law.cornell.edu/supremecourt/text/589/376"},
+{name:"Carroll v. United States",cite:"267 U.S. 132",year:"1925",cat:"Vehicle Searches",terms:["carroll doctrine","search a car without warrant","automobile exception","probable cause vehicle search"],rule:"A vehicle may be searched without a warrant when there is probable cause to believe it contains contraband or evidence, and the vehicle is mobile.",can:["Search a readily mobile vehicle, without a warrant, on probable cause (including containers that might hold the object of the search)."],cannot:["Use Carroll without probable cause, or for a vehicle in a home/curtilage — see Collins v. Virginia."],watch:"Probable cause and mobility are both required.",opinion:"https://www.law.cornell.edu/supremecourt/text/267/132"},
+{name:"Arizona v. Gant",cite:"556 U.S. 332",year:"2009",cat:"Vehicle Searches",terms:["search car after arrest","vehicle search incident","gant rule","arrestee secured"],rule:"After arresting a vehicle occupant, police may search the passenger compartment only if the arrestee is unsecured within reaching distance, OR evidence of the crime of arrest might be in the vehicle.",can:["Search the passenger compartment when the arrestee can actually reach it, or when the crime of arrest could leave evidence in the car (drugs, weapons, gang offenses)."],cannot:["Search the car incident to arrest when the arrestee is secured and the crime of arrest would leave no evidence in the vehicle."],watch:"Gant narrowed the older broad practice — secured arrestee plus a no-evidence offense means no vehicle search under Gant.",opinion:"https://www.law.cornell.edu/supremecourt/text/556/332"},
+{name:"Wyoming v. Houghton",cite:"526 U.S. 295",year:"1999",cat:"Vehicle Searches",terms:["passenger belongings search","purse in car","passenger property","container search vehicle"],rule:"When officers have probable cause to search a car, they may inspect containers belonging to passengers that might conceal the object of the search.",can:["Search a passenger's container in the vehicle if it could hold the item giving probable cause."],cannot:["Search a passenger's person under Houghton — the case covers property/containers in the car, not the passenger's body."],watch:"The probable cause must cover items that could be in that container.",opinion:"https://www.law.cornell.edu/supremecourt/text/526/295"},
+{name:"Collins v. Virginia",cite:"584 U.S. 586",year:"2018",cat:"Vehicle Searches",terms:["car in driveway","motorcycle in driveway","curtilage vehicle","search vehicle at home"],rule:"The automobile exception does NOT permit entering the curtilage of a home to search a vehicle there without a warrant.",can:["Search a mobile vehicle in a public place on probable cause under Carroll, or seek a warrant for a vehicle within the curtilage."],cannot:["Walk into a driveway/curtilage and search or uncover a vehicle parked there without a warrant, consent, or another exception."],watch:"Collins is the limit on Carroll — where the vehicle sits can change the rule.",opinion:"https://www.law.cornell.edu/supremecourt/text/584/586"},
+{name:"Chimel v. California",cite:"395 U.S. 752",year:"1969",cat:"Searches & Custody",terms:["search incident to arrest","wingspan","lunge area","search after arrest"],rule:"Incident to a lawful arrest, officers may search the arrestee's person and the area within the arrestee's immediate control — where a weapon or destructible evidence could be reached.",can:["Search the person and the immediate grab area at the time of a lawful arrest."],cannot:["Search an entire home or rooms beyond the arrestee's reach incident to arrest."],watch:"For vehicles, the incident-search rule is Gant's narrower test.",opinion:"https://www.law.cornell.edu/supremecourt/text/395/752"},
+{name:"Riley v. California",cite:"573 U.S. 373",year:"2014",cat:"Searches & Custody",terms:["search phone","cell phone arrest","look through smartphone","search my phone","phone search"],rule:"Police generally may not search digital information on a cell phone seized during an arrest without a warrant.",can:["Seize and secure the phone while seeking a warrant","protect against physical threats as with any object."],cannot:["Scroll, open apps, or search phone contents incident to arrest without a warrant, consent, or true exigent circumstances."],watch:"Riley is unanimous — “get a warrant” is the Court's answer for phone contents.",opinion:"https://www.law.cornell.edu/supremecourt/text/573/373"},
+{name:"Berkemer v. McCarty",cite:"468 U.S. 420",year:"1984",cat:"Searches & Custody",terms:["miranda traffic stop","roadside questioning","read rights on stop","custody miranda"],rule:"A person subjected to ordinary roadside questioning during a routine traffic stop is not in Miranda custody, so Miranda warnings are not required for that questioning; once custody attaches, warnings are required.",can:["Ask routine roadside questions during an ordinary traffic stop without Miranda warnings."],cannot:["Skip Miranda once a person is formally arrested or restrained to the degree of a formal arrest."],watch:"A stop that becomes custody-like changes the answer.",opinion:"https://www.law.cornell.edu/supremecourt/text/468/420"},
+{name:"Graham v. Connor",cite:"490 U.S. 386",year:"1989",cat:"Force & Pursuits",terms:["graham factors","use of force standard","objective reasonableness"],rule:"Force is judged under the Fourth Amendment's objective-reasonableness standard, based on the facts at the moment — severity of the crime, immediate threat, resistance, and flight — without 20/20 hindsight.",can:["Articulate force decisions using the Graham factors and what was known at the time."],cannot:["Judge or justify force solely by the outcome, or by subjective intent — the test is objective reasonableness from a reasonable officer on the scene."],watch:"Graham is the framework, not a permission — agency policy may be stricter and controls conduct.",opinion:"https://www.law.cornell.edu/supremecourt/text/490/386"},
+{name:"Tennessee v. Garner",cite:"471 U.S. 1",year:"1985",cat:"Force & Pursuits",terms:["shooting fleeing felon","deadly force escape","garner rule","shoot fleeing suspect"],rule:"Deadly force to prevent escape may be used only where the suspect poses a significant threat of death or serious physical injury to the officer or others (necessary to prevent escape, warning where feasible).",can:["Use deadly force against a fleeing suspect who poses a significant threat of death or serious physical injury."],cannot:["Use deadly force against a fleeing suspect who is non-dangerous — the old fleeing-felon rule was struck down."],watch:"State law and agency policy are often stricter — policy controls.",opinion:"https://www.law.cornell.edu/supremecourt/text/471/1"},
+{name:"Scott v. Harris",cite:"550 U.S. 372",year:"2007",cat:"Force & Pursuits",terms:["ramming car pursuit","pit fleeing vehicle","end pursuit force","dangerous chase"],rule:"An officer's attempt to end a dangerous high-speed pursuit by ramming the fleeing vehicle does not violate the Fourth Amendment when the driver's conduct puts the public and officers at serious risk.",can:["Consider vehicle-ending tactics within the Graham/Garner framework when a pursuit creates serious danger — subject to state law and agency policy."],cannot:["Read Scott as blanket approval for any ramming in any chase — the Court emphasized the extreme danger in that pursuit."],watch:"Pursuit policy varies widely and controls conduct day-to-day.",opinion:"https://www.law.cornell.edu/supremecourt/text/550/372"},
+{name:"Atwater v. City of Lago Vista",cite:"532 U.S. 318",year:"2001",cat:"Traffic Stops",terms:["arrest for seat belt","arrest fine only offense","custodial arrest misdemeanor","minor offense arrest"],rule:"If an officer has probable cause to believe a person committed even a minor offense (including a fine-only misdemeanor) in the officer's presence, a custodial arrest does not violate the Fourth Amendment.",can:["Make a custodial arrest for a minor offense committed in your presence when probable cause exists and state law/policy allow it."],cannot:["Assume Atwater requires an arrest, or overrides state law or agency policy limiting custodial arrests."],watch:"Atwater says the Constitution allows it — your state statute and agency policy decide whether you should and may.",opinion:"https://www.law.cornell.edu/supremecourt/text/532/318"}
+];
+
+var CATS = ["All","Traffic Stops","Stops & Frisks","Vehicle Searches","Searches & Custody","Force & Pursuits"];
+var activeCat = "All";
+var listEl = document.getElementById('list');
+var countEl = document.getElementById('count');
+var emptyEl = document.getElementById('empty');
+var searchEl = document.getElementById('search');
+var chipsEl = document.getElementById('chips');
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function norm(s){return s.toLowerCase().replace(/[’‘]/g,"'").replace(/[“”]/g,'"').replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();}
+function haystack(c){
+  return norm(c.name+" "+c.cite+" "+c.year+" "+c.cat+" "+c.rule+" "+c.can.join(" ")+" "+c.cannot.join(" ")+" "+c.watch+" "+c.terms.join(" "));
+}
+function matches(c,q){
+  if(!q) return true;
+  var nq = norm(q);
+  var hay = haystack(c);
+  if(hay.indexOf(nq)>-1) return true;
+  // also check raw terms phrases
+  for(var i=0;i<c.terms.length;i++){ if(norm(c.terms[i]).indexOf(nq)>-1) return true; }
+  var toks = nq.split(" ").filter(function(t){return t.length>1;});
+  if(!toks.length) return true;
+  // require most tokens present (handles "can i get the passenger out too")
+  var hit=0;
+  for(var j=0;j<toks.length;j++){ if(hay.indexOf(toks[j])>-1) hit++; }
+  return hit>=Math.max(1, Math.ceil(toks.length*0.6));
+}
+function render(){
+  var q = searchEl.value.trim();
+  var sorted = CARDS.slice().sort(function(a,b){return a.name.localeCompare(b.name);});
+  var shown = sorted.filter(function(c){
+    if(activeCat!=="All" && c.cat!==activeCat) return false;
+    return matches(c,q);
+  });
+  countEl.textContent = shown.length + " of " + CARDS.length + " cards";
+  emptyEl.style.display = shown.length ? "none" : "block";
+  var html = "";
+  shown.forEach(function(c){
+    html += '<details class="card">'
+      + '<summary>'
+      + '<div class="card-top"><span class="tag cat">'+esc(c.cat)+'</span><span class="tag">Nationwide</span><span class="tag">U.S. Supreme Court</span></div>'
+      + '<h3 class="case-name">'+esc(c.name)+'</h3>'
+      + '<p class="cite">'+esc(c.cite)+' ('+esc(c.year)+')</p>'
+      + '<p class="rule-preview"><strong>The Rule:</strong> '+esc(c.rule)+'</p>'
+      + '<p class="expand-hint"><span class="open-txt">Tap to see CAN / CANNOT / Watch out ▾</span><span class="close-txt">Tap to collapse ▴</span></p>'
+      + '</summary>'
+      + '<div class="card-body">'
+      + '<h3>The Rule</h3><p class="rule-big">'+esc(c.rule)+'</p>'
+      + '<h3 style="color:var(--can)">You CAN</h3><ul class="can">'
+      + c.can.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")
+      + '</ul>'
+      + '<h3 style="color:var(--cannot)">You CANNOT <span class="sub">(under this case alone)</span></h3><ul class="cannot">'
+      + c.cannot.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")
+      + '</ul>'
+      + '<h3 style="color:var(--watch)">Watch out</h3><div class="watch-box"><p>'+esc(c.watch)+'</p></div>'
+      + '<h3>Full opinion</h3><a class="opinion-link" href="'+c.opinion+'" target="_blank" rel="noopener">Read the full opinion ↗</a>'
+      + '<div class="card-foot"><div>'+esc(FOOTER)+'</div></div>'
+      + '</div></details>';
+  });
+  listEl.innerHTML = html;
+}
+CATS.forEach(function(cat){
+  var b=document.createElement('button');
+  b.type='button'; b.className='chip'; b.textContent=cat;
+  b.setAttribute('aria-pressed', cat==="All" ? "true":"false");
+  b.addEventListener('click',function(){
+    activeCat=cat;
+    var all=chipsEl.querySelectorAll('.chip');
+    for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed', all[i].textContent===cat?"true":"false");
+    render();
+  });
+  chipsEl.appendChild(b);
+});
+searchEl.addEventListener('input', render);
+render();
+
+/* Disclaimer gate */
+var gate=document.getElementById('gate');
+var app=document.getElementById('app');
+function hasAccepted(){
+  try{ return localStorage.getItem('caseLawDisclaimerV1')==='accepted'; }catch(e){ return false; }
+}
+function showApp(){ gate.style.display='none'; app.style.display='block'; window.scrollTo(0,0); }
+if(hasAccepted()){ showApp(); }
+document.getElementById('acceptBtn').addEventListener('click',function(){
+  try{ localStorage.setItem('caseLawDisclaimerV1','accepted'); }catch(e){}
+  showApp();
+});
+
+/* ===== Offline / PWA =====
+   All 25 cards are embedded in this page, so search and reading never
+   need the network once the page itself is saved. The service worker
+   (sw.js, at the app root so its scope covers this page) precaches this
+   page + manifest + icons in a versioned cache; the page script below
+   also writes the same cache directly, so the saved copy exists even
+   where the worker's registration is still pending. Navigations are
+   network-first in the worker, so an online open always picks up the
+   newest published version. */
+var APP_CACHE = 'case-law-street-v5-2026-11-14';
+var CORE_FILES = ['data:application/octet-stream;base64,eyJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBhMGQxMiIsImRlc2NyaXB0aW9uIjoiUXVpY2stcmVmZXJlbmNlIGNhc2UgbGF3IGNhcmRzIGZvciBvZmZpY2VycyDigJQgd29ya3Mgb2ZmbGluZSBvbmNlIG9wZW5lZC4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImljb25zIjpbeyJwdXJwb3NlIjoiYW55Iiwic2l6ZXMiOiIxOTJ4MTkyIiwic3JjIjoiaWNvbi0xOTIucG5nIiwidHlwZSI6ImltYWdlL3BuZyJ9LHsicHVycG9zZSI6ImFueSIsInNpemVzIjoiNTEyeDUxMiIsInNyYyI6Imljb24tNTEyLnBuZyIsInR5cGUiOiJpbWFnZS9wbmcifSx7InB1cnBvc2UiOiJtYXNrYWJsZSIsInNpemVzIjoiNTEyeDUxMiIsInNyYyI6Imljb24tbWFza2FibGUtNTEyLnBuZyIsInR5cGUiOiJpbWFnZS9wbmcifV0sImlkIjoiLi4vaW5kZXguaHRtbCIsIm5hbWUiOiJDYXNlIExhdyBmb3IgdGhlIFN0cmVldCIsIm9yaWVudGF0aW9uIjoicG9ydHJhaXQiLCJzY29wZSI6Ii4uLyIsInNob3J0X25hbWUiOiJDYXNlIExhdyIsInN0YXJ0X3VybCI6Ii4uL2luZGV4Lmh0bWwiLCJ0aGVtZV9jb2xvciI6IiMwYTBkMTIifQ==','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAEa0lEQVR4nO3dQVLbQBRFUZFiRBWTrCDrygKzrqwiUzJyBZQ22JbU/VvvnBkJ2Ipat7+AgJ9eXr+/LRDq2+gDgJEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQLTn0QeQ6vevPx/e/vHzZdCRZHvy8wB9rS/8NSH05Raoo68u/lvfh/0IgGgC6OSend0U6EcARBMA0QRANAF0cs+XN30ptB8BEE0AHd2ys9v9+/Kd4EFaX+p08fdnAgziYq9BAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQrexvhfALYs+l6i8BKDkBXPznU3VNSwYAvZQLoOpOwXYV13aKF8mrev+41dlfKK/iBb9WagK8P2HvL4YZTiQfzbKWpQKA3soE0NoxKu8cXDfTWpYJAEYoEcC1+8X125V2DtpmW8sSAcAoAiDa8AA+G5mtP68yOvnfjGs5PAAYaWgAt+wYrb+vsHPw0axraQIQbVgA9+wYrfcbvXPwz8xraQIQTQBEGxLAIyOz9f5ug8abfS1NAKJ1D2DLjtH6OFNgnDOspQlAtK4B7LFjtD7eFOjvLGtpAhCtWwB77hitxzEF+jnTWpoARBMA0boEcMTIbD2e26DjnW0tTQCiHR7AkTtG63FNgeOccS1NAKIdGkCPHaP1+KbA/s66liYA0Q4LoOeO0XoeU2A/Z15LE4BoAiDaIQGMGJmt53MbtN3Z19IEINruAYzcMVrPawo8LmEtTQCi7RpAhR2j9fymwP1S1tIEIJoAiLZbAJVG5oXboMckraUJQLRdAqi4Y1yYAvdJW0sTgGibA6i8Y1yYArdJXEsTgGhPL6/f3x794Jl30wo73Pr8jTym1LU0AYi2KYAKu+gjZj3uI816TrYe9/PoA6COxLV0C0S0zROg0idy18xwjBXMcJ72PkYTgGibA1gXWO3LaTPsalUkruXhPxQ/UpXjmFmVc1j6h+JbJY4+ca3nt/t/LW0tN30neO3aiep54VU4hltVvj2rcB57HMOuASzL17vFESdwxHPuoXIAy5KxlrsHsCz3jcxH/kFHP34v1QNYlvOv5SEBXIy8d6x4Ma3NEMDFWddy8zfCPnM58J4nr/JFNLOzruWhAVwc/QMpLvp+zraWXQJ4b49vtrjgazjDWnYPYG30CWA/M66l/wtENAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0Q59oezZjXxx6D3N+OJ1vZgARBMA0QRANJ8DEM0EIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKL9BX0GruGevpfBAAAAAElFTkSuQmCC','data:image/png;base64,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AAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgfy7AAAgkCcAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACB/gdaWExju8RmkAAAAABJRU5ErkJggg==','data:image/png;base64,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QCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIH+B5RbRVl6xUkPAAAAAElFTkSuQmCC','data:application/javascript;base64,LyogQ2FzZSBMYXcgZm9yIHRoZSBTdHJlZXQg4oCUIG9mZmxpbmUgc2VydmljZSB3b3JrZXIgKHJldGFpbmVkIGNvcHkpCiAgIFRoZSBhdXRob3JpdGF0aXZlIHdvcmtlciBpcyBzdy5qcyBhdCB0aGUgYXBwIHJvb3QsIHJlZ2lzdGVyZWQgYnkKICAgaW5kZXguaHRtbDsgdGhpcyBhc3NldHMvIGNvcHkgaXMga2VwdCBvbmx5IHNvIHRoZSBwYWdlLXNpZGUgcHJlY2FjaGUKICAgbGlzdCBzdGF5cyB2YWxpZCwgYW5kIGlzIG5ldmVyIHJlZ2lzdGVyZWQgYXMgdGhlIHBhZ2UncyB3b3JrZXIuCiAgIFZlcnNpb25lZCBjYWNoZTogYnVtcCBDQUNIRV9OQU1FIG9uIGV2ZXJ5IHB1Ymxpc2hlZCB1cGRhdGUuCiAgIFRoZSBvbGQgY2FjaGUgaXMgZGVsZXRlZCBvbiBhY3RpdmF0aW9uLCBhbmQgbmF2aWdhdGlvbnMgYXJlCiAgIG5ldHdvcmstZmlyc3QsIHNvIGNvcnJlY3Rpb25zIGFuZCBuZXcgY2FyZHMgcmVhY2ggcGhvbmVzIG9uIHRoZQogICBuZXh0IG9ubGluZSBvcGVuIOKAlCBub2JvZHkgaXMgc3RyYW5kZWQgb24gYSBzdGFsZSBjb3B5LiBPZmZsaW5lLAogICB0aGUgY2FjaGVkIGNvcHkgaXMgc2VydmVkIGNhY2hlLWZpcnN0LiAqLwp2YXIgQ0FDSEVfTkFNRSA9ICdjYXNlLWxhdy1zdHJlZXQtdjUtMjAyNi0xMS0xNCc7CnZhciBDT1JFID0gWwogICcuLi9pbmRleC5odG1sJywKICAnLi4vJywKICAnLi9tYW5pZmVzdC53ZWJtYW5pZmVzdCcsCiAgJy4vaWNvbi0xOTIucG5nJywKICAnLi9pY29uLTUxMi5wbmcnLAogICcuL2ljb24tbWFza2FibGUtNTEyLnBuZycKXTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignaW5zdGFsbCcsIGZ1bmN0aW9uIChldmVudCkgewogIGV2ZW50LndhaXRVbnRpbCgKICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpLnRoZW4oZnVuY3Rpb24gKGNhY2hlKSB7CiAgICAgIHJldHVybiBjYWNoZS5hZGRBbGwoQ09SRSk7CiAgICB9KS50aGVuKGZ1bmN0aW9uICgpIHsgcmV0dXJuIHNlbGYuc2tpcFdhaXRpbmcoKTsgfSkKICApOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignYWN0aXZhdGUnLCBmdW5jdGlvbiAoZXZlbnQpIHsKICBldmVudC53YWl0VW50aWwoCiAgICBjYWNoZXMua2V5cygpLnRoZW4oZnVuY3Rpb24gKG5hbWVzKSB7CiAgICAgIHJldHVybiBQcm9taXNlLmFsbChuYW1lcy5tYXAoZnVuY3Rpb24gKG5hbWUpIHsKICAgICAgICBpZiAobmFtZSAhPT0gQ0FDSEVfTkFNRSkgcmV0dXJuIGNhY2hlcy5kZWxldGUobmFtZSk7CiAgICAgIH0pKTsKICAgIH0pLnRoZW4oZnVuY3Rpb24gKCkgeyByZXR1cm4gc2VsZi5jbGllbnRzLmNsYWltKCk7IH0pCiAgKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZnVuY3Rpb24gKGV2ZW50KSB7CiAgdmFyIHJlcSA9IGV2ZW50LnJlcXVlc3Q7CiAgaWYgKHJlcS5tZXRob2QgIT09ICdHRVQnKSByZXR1cm47CiAgdmFyIHVybCA9IG5ldyBVUkwocmVxLnVybCk7CiAgaWYgKHVybC5vcmlnaW4gIT09IHNlbGYubG9jYXRpb24ub3JpZ2luKSByZXR1cm47IC8vIENvcm5lbGwgZXRjLiBnbyB0byBuZXR3b3JrCgogIGlmIChyZXEubW9kZSA9PT0gJ25hdmlnYXRlJykgewogICAgLy8gTmV0d29yay1maXJzdCBmb3IgdGhlIHBhZ2UgaXRzZWxmOiBvbmxpbmUgb3BlbnMgYWx3YXlzIGdldCB0aGUKICAgIC8vIG5ld2VzdCBwdWJsaXNoZWQgdmVyc2lvbiBhbmQgcmVmcmVzaCB0aGUgY2FjaGU7IG9mZmxpbmUgb3BlbnMKICAgIC8vIGZhbGwgYmFjayB0byB0aGUgc2F2ZWQgY29weS4KICAgIGV2ZW50LnJlc3BvbmRXaXRoKAogICAgICBmZXRjaChyZXEpLnRoZW4oZnVuY3Rpb24gKHJlcykgewogICAgICAgIHZhciBjb3B5ID0gcmVzLmNsb25lKCk7CiAgICAgICAgY2FjaGVzLm9wZW4oQ0FDSEVfTkFNRSkudGhlbihmdW5jdGlvbiAoY2FjaGUpIHsgY2FjaGUucHV0KCcuLi9pbmRleC5odG1sJywgY29weSk7IH0pOwogICAgICAgIHJldHVybiByZXM7CiAgICAgIH0pLmNhdGNoKGZ1bmN0aW9uICgpIHsKICAgICAgICByZXR1cm4gY2FjaGVzLm1hdGNoKCcuLi9pbmRleC5odG1sJywgeyBpZ25vcmVTZWFyY2g6IHRydWUgfSkudGhlbihmdW5jdGlvbiAoaGl0KSB7CiAgICAgICAgICByZXR1cm4gaGl0IHx8IGNhY2hlcy5tYXRjaChyZXEsIHsgaWdub3JlU2VhcmNoOiB0cnVlIH0pOwogICAgICAgIH0pOwogICAgICB9KQogICAgKTsKICAgIHJldHVybjsKICB9CgogIC8vIFN0YXRpYyBhc3NldHMgKG1hbmlmZXN0LCBpY29ucyk6IGNhY2hlLWZpcnN0LCByZWZyZXNoIGluIGJhY2tncm91bmQuCiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2gocmVxLCB7IGlnbm9yZVNlYXJjaDogdHJ1ZSB9KS50aGVuKGZ1bmN0aW9uIChoaXQpIHsKICAgICAgdmFyIG5ldHdvcmsgPSBmZXRjaChyZXEpLnRoZW4oZnVuY3Rpb24gKHJlcykgewogICAgICAgIGlmIChyZXMgJiYgcmVzLnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICB2YXIgY29weSA9IHJlcy5jbG9uZSgpOwogICAgICAgICAgY2FjaGVzLm9wZW4oQ0FDSEVfTkFNRSkudGhlbihmdW5jdGlvbiAoY2FjaGUpIHsgY2FjaGUucHV0KHJlcSwgY29weSk7IH0pOwogICAgICAgIH0KICAgICAgICByZXR1cm4gcmVzOwogICAgICB9KS5jYXRjaChmdW5jdGlvbiAoKSB7IHJldHVybiBoaXQ7IH0pOwogICAgICByZXR1cm4gaGl0IHx8IG5ldHdvcms7CiAgICB9KQogICk7Cn0pOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdtZXNzYWdlJywgZnVuY3Rpb24gKGV2ZW50KSB7CiAgaWYgKGV2ZW50LmRhdGEgJiYgZXZlbnQuZGF0YS50eXBlID09PSAnU0tJUF9XQUlUSU5HJykgc2VsZi5za2lwV2FpdGluZygpOwp9KTsK'];
+var offlineBar = document.getElementById('offlineBar');
+var toastEl = document.getElementById('toast');
+var saveStateEl = document.getElementById('saveState');
+var footSaveEl = document.getElementById('footSave');
+var toastTimer = null;
+
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.hidden = false;
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toastEl.hidden = true; }, 4500);
+}
+function refreshOfflineUI(){
+  var off = !navigator.onLine;
+  offlineBar.hidden = !off;
+}
+window.addEventListener('offline', function(){ refreshOfflineUI(); showToast('You’re offline — showing your saved copy. Full opinions need signal.'); });
+window.addEventListener('online', function(){
+  refreshOfflineUI();
+  showToast('Back online — checking for the latest version…');
+  checkForUpdate().then(function(isLatest){
+    if(isLatest) showToast('Back online — you’re on the latest version.');
+  });
+});
+refreshOfflineUI();
+
+/* Opinion links need signal: offline, explain instead of a dead page. */
+listEl.addEventListener('click', function(ev){
+  var t = ev.target;
+  var a = t && t.closest ? t.closest('a.opinion-link') : null;
+  if(a && !navigator.onLine){
+    ev.preventDefault();
+    showToast('You’re offline — full opinions need signal. The card above still works from your saved copy.');
+    offlineBar.hidden = false;
+  }
+});
+
+/* Blog button needs signal too: offline, explain instead of a dead page. */
+var blogBtn = document.getElementById('blogBtn');
+if(blogBtn){
+  blogBtn.addEventListener('click', function(ev){
+    if(!navigator.onLine){
+      ev.preventDefault();
+      showToast('You’re offline — the blog needs signal. Your saved cards still work from your saved copy.');
+      offlineBar.hidden = false;
+    }
+  });
+}
+
+function markSaved(){
+  saveStateEl.textContent = '✓ Saved for offline use on this device';
+  saveStateEl.classList.add('show');
+  if(footSaveEl) footSaveEl.textContent = 'Saved for offline use — opens with no signal once it has loaded once online.';
+}
+/* Show the saved confirmation ONLY when the copy is complete and the
+   root service worker actually controls this page: cache must hold the
+   page, the manifest, and all three icons. Anything less stays silent
+   rather than certifying a copy that cannot reopen offline. */
+function verifySavedCopy(){
+  if(!('caches' in window) || !('serviceWorker' in navigator)) return;
+  if(!navigator.serviceWorker.controller) return;
+  caches.open(APP_CACHE).then(function(cache){
+    return cache.keys().then(function(keys){
+      var urls = keys.map(function(k){ return k.url; }).join(' ');
+      var pageKeys = keys.filter(function(k){ return k.url.indexOf('assets/')===-1; });
+      var ok = pageKeys.length>0
+        && urls.indexOf('manifest.webmanifest')>-1
+        && urls.indexOf('icon-192.png')>-1
+        && urls.indexOf('icon-512.png')>-1
+        && urls.indexOf('icon-maskable-512.png')>-1;
+      if(ok) markSaved();
+    });
+  }).catch(function(){});
+}
+var verifyTries = 0;
+function verifySavedLoop(){
+  verifySavedCopy();
+  verifyTries++;
+  if(verifyTries<10 && !saveStateEl.classList.contains('show')){
+    setTimeout(verifySavedLoop, 1500);
+  }
+}
+function precacheFromPage(){
+  if(!('caches' in window)) return;
+  caches.open(APP_CACHE).then(function(cache){
+    /* Save this exact page (with all cards embedded) under its own URL. */
+    return fetch(window.location.href.split('#')[0], {credentials:'same-origin'}).then(function(res){
+      if(res && res.ok) return cache.put(window.location.href.split('#')[0], res);
+    }).catch(function(){}).then(function(){
+      return Promise.all(CORE_FILES.map(function(u){
+        return cache.add(u).catch(function(){});
+      }));
+    });
+  }).then(function(){ verifySavedLoop(); }).catch(function(){});
+}
+
+var swReg = null;
+function checkForUpdate(){
+  if(!swReg) return Promise.resolve(false);
+  return swReg.update().then(function(){
+    return !(swReg.installing || swReg.waiting);
+  }).catch(function(){ return false; });
+}
+function watchRegistration(reg){
+  swReg = reg;
+  /* If a newer worker is already waiting, let it take over. */
+  if(reg.waiting && navigator.serviceWorker.controller){
+    reg.waiting.postMessage({type:'SKIP_WAITING'});
+  }
+  reg.addEventListener('updatefound', function(){
+    var nw = reg.installing;
+    if(!nw) return;
+    nw.addEventListener('statechange', function(){
+      if(nw.state === 'installed' && navigator.serviceWorker.controller){
+        if(reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'});
+      }
+    });
+  });
+}
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    /* Only a worker beside index.html can control the page and serve
+       it offline, so the page registers the root sw.js — and nothing
+       else. The assets/ copy is never registered as the page's worker:
+       its default scope is the assets/ folder and it could never
+       control this page. */
+    navigator.serviceWorker.register('sw.js').then(watchRegistration).catch(function(){ /* page-side cache above still saves the copy */ });
+    var refreshing = false;
+    var hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      verifySavedLoop();
+      /* Reload only when an UPDATE takes over a page that was already
+         controlled — never on the very first claim. */
+      if(hadController && !refreshing){ refreshing = true; window.location.reload(); }
+    });
+  });
+}
+precacheFromPage();
+</script>
+</body>
+</html>
