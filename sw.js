@@ -7,7 +7,7 @@
    network-first, so corrections and new cards reach phones on the
    next online open — nobody is stranded on a stale copy. Offline,
    the cached copy is served cache-first. */
-var CACHE_NAME = 'case-law-street-v6-2026-11-23';
+var CACHE_NAME = 'case-law-street-v7-2026-11-23';
 var CORE = [
   './index.html',
   './',
