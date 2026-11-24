@@ -118,6 +118,18 @@
   .blog-btn-sub{font-size:15px;font-weight:600;line-height:1.35;color:#1c1917}
   .req-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 14px;margin:0 0 10px;border-radius:10px;border:1.5px solid var(--accent);color:var(--accent);font-weight:700;font-size:15.5px;text-decoration:none}
   .req-btn:active{background:var(--surface)}
+
+  .home-switch{display:flex;gap:10px;margin:0 0 14px}
+  .view-btn{flex:1;min-height:56px;border-radius:12px;border:1.5px solid var(--border,#2a3242);background:var(--surface,#12161f);color:var(--text,#e8ecf3);font-size:17px;font-weight:800;cursor:pointer;padding:8px 6px}
+  .view-btn span{display:block;font-size:12.5px;font-weight:600;color:var(--muted,#9aa5b5);margin-top:2px}
+  .view-btn[aria-pressed="true"]{border-color:var(--accent,#d4a017);color:var(--accent,#d4a017)}
+  .view-btn[aria-pressed="true"] span{color:var(--text,#e8ecf3)}
+  .state-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}
+  .state-pill{font-size:15px}
+  .change-btn{min-height:40px;padding:6px 12px;border-radius:9px;border:1.5px solid var(--accent,#d4a017);background:transparent;color:var(--accent,#d4a017);font-weight:700;cursor:pointer}
+  .state-picker{border:1px solid var(--border,#2a3242);border-radius:10px;padding:12px 14px;margin:0 0 12px}
+  .state-picker p{margin:6px 0}
+  .juris-banner{border:1.5px solid var(--accent,#d4a017);border-radius:10px;padding:10px 14px;margin:0 0 12px;font-weight:700}
   @media (min-width:640px){
     header.app-head h1{font-size:36px}
     .gate-card h1{font-size:32px}
@@ -161,6 +173,13 @@
 
   <a id="reqBtn" class="req-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSemtrNo00yi22UDIsTgtcQlfg7FD-MpZa_ApyMyvnjv_e_XPg/viewform" target="_blank" rel="noopener" aria-label="Request a case or report an error — opens the request form in a new tab">Request a Case / Report an Error <span aria-hidden="true">↗</span></a>
 
+
+  <div class="home-switch" role="group" aria-label="Choose library">
+    <button id="viewCaseBtn" class="view-btn" type="button" aria-pressed="true">Case Law<span>Nationwide — U.S. Supreme Court</span></button>
+    <button id="viewTrafficBtn" class="view-btn" type="button" aria-pressed="false">Traffic Law<span>Alabama — Title 32 (pilot)</span></button>
+  </div>
+
+  <div id="caseView">
   <div class="search-wrap">
     <label class="search-label" for="search">Search case law</label>
     <input id="search" type="search" inputmode="search" autocomplete="off" placeholder="Try “frisk”, “Riley”, or “can I get the passenger out too?”" aria-describedby="count">
@@ -174,6 +193,38 @@
 
   <main id="list" aria-label="Case law cards"></main>
   <div id="empty" role="status">No card matches — try a case name, a topic like ‘frisk’, or a plain question.</div>
+
+  </div><!-- /caseView -->
+
+  <div id="trafficView" hidden>
+    <div class="state-bar">
+      <span class="state-pill">State: <strong>Alabama</strong></span>
+    <button id="changeStateBtn" class="change-btn" type="button" aria-expanded="false">Change state</button>
+    </div>
+    <div id="statePicker" class="state-picker" hidden>
+      <p><strong>Alabama</strong> is live — it is your saved default and opens every time.</p>
+      <p>Other states are not live yet, so there is nothing unverified to land on. Want one built next?</p>
+      <p><a class="opinion-link" href="https://docs.google.com/forms/d/e/1FAIpQLSemtrNo00yi22UDIsTgtcQlfg7FD-MpZa_ApyMyvnjv_e_XPg/viewform" target="_blank" rel="noopener">Request this state — Tennessee, Georgia, Mississippi, Florida, or another ↗</a></p>
+    </div>
+    <p class="juris-banner">ALABAMA ONLY — these cards state Alabama law (Title 32). They do not apply in any other state.</p>
+    <div class="search-wrap">
+      <label class="search-label" for="tsearch">Search Alabama traffic law</label>
+      <input id="tsearch" type="search" inputmode="search" autocomplete="off" placeholder="Try “move over”, “seat belt”, or a cite like “5A-133”">
+      <div class="chips" id="tchips" role="group" aria-label="Filter traffic cards by category"></div>
+    </div>
+    <div class="count-row">
+      <h2>Alabama Traffic Cards</h2>
+      <span id="tcount" aria-live="polite"></span>
+    </div>
+    <main id="tlist" aria-label="Alabama traffic law cards"></main>
+    <div id="tempty" role="status">No traffic card matches — try a topic like ‘signal’ or a cite number like ‘58.2’.</div>
+    <section class="request" aria-labelledby="treqH">
+      <h2 id="treqH">Request a law / Report an error</h2>
+      <p>Don’t see the Alabama traffic law you need, or spot something that looks wrong? Send it in through the request form — it goes straight to Chris by email. The blog’s Request a Case page explains what to include.</p>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSemtrNo00yi22UDIsTgtcQlfg7FD-MpZa_ApyMyvnjv_e_XPg/viewform" target="_blank" rel="noopener">Request a Law — request form</a>
+      <p>Laws are picked by Chris and verified against the actual Alabama Code before anything is added or changed — nothing goes into this library unverified.</p>
+    </section>
+  </div>
 
   <section class="request" aria-labelledby="reqH">
     <h2 id="reqH">Request a case / Report an error</h2>
@@ -327,6 +378,114 @@ CATS.forEach(function(cat){
 searchEl.addEventListener('input', render);
 render();
 
+
+/* ===== Alabama Traffic Law (pilot, 5 cards) =====
+   Verified against the official Code of Alabama on ALISON,
+   last verified 2026-11-24. Alabama only. */
+var TFOOTER = "ALABAMA ONLY — Quick reference only, not legal advice. Check agency policy and the current Alabama Code. Last verified 2026-11-24.";
+var TRAFFIC_CARDS = [
+{name:"Too Fast for Conditions",cite:"Ala. Code § 32-5A-170",cat:"Speed & Following",terms:["reasonable and prudent speed","too fast for conditions","basic speed law","rain fog speed"],rule:"A driver may not drive faster than is reasonable and prudent for the conditions, considering actual and potential hazards. The posted limit is not a safe-speed guarantee — a safe and appropriate speed is required at intersections and railroad crossings, on curves and hill crests, on narrow or winding roads, and whenever weather, highway conditions, pedestrians, or other traffic create a special hazard.",observe:["Speed that is too fast for a specific condition you can name — rain, fog, standing water, heavy traffic, a blind crest, a curve — not just a number. Articulate the hazard, not only the speed."],watch:"“I was under the limit” is not a defense under this section — the maximum-limits section (§ 32-5A-171) sets the ceiling; this section can be violated below it.",penalty:"No specific penalty stated in this section.",source:"https://alison.legislature.state.al.us/code-of-alabama?section=32-5A-170"},
+{name:"Turning and Lane-Change Signals",cite:"Ala. Code § 32-5A-133",cat:"Lanes, Passing & Turning",terms:["turn signal","lane change signal","100 feet signal","no signal","blinker"],rule:"No one may turn a vehicle, or move right or left on a roadway, unless the movement can be made with reasonable safety AND an appropriate signal is given. A signal of intent to turn or move right or left must be given continuously during at least the last 100 feet traveled before turning. A driver also may not stop or suddenly slow without first giving an appropriate signal to a driver immediately behind, when there is an opportunity to signal.",observe:["The turn or lateral move (a lane change is a move right or left), the missing, late, or non-continuous signal measured against the 100-foot rule, or the unsafe movement itself."],watch:"“Nobody was behind me” — the section does not condition the signal duty on another vehicle being present. Signals may not be flashed on one side only as a courtesy or “do pass” signal.",penalty:"No specific penalty stated in this section.",source:"https://alison.legislature.state.al.us/code-of-alabama?section=32-5A-133"},
+{name:"Stop Signs and Yield Signs",cite:"Ala. Code § 32-5A-112",cat:"Right-of-Way, Stops & Signals",terms:["stop sign","yield sign","failure to yield","ran the stop sign","stop line"],rule:"At a stop sign (unless directed to proceed by a police officer), stop at the marked stop line; if none, before the near-side crosswalk; if none, at the point nearest the intersecting roadway where you can see approaching traffic. After stopping, yield to any vehicle in the intersection or approaching so closely as to be an immediate hazard. At a yield sign, slow to a speed reasonable for conditions and stop if safety requires it, then yield the same way. A collision in the intersection after passing a yield sign without stopping is prima facie evidence of failure to yield.",observe:["Which sign, where the vehicle stopped (or didn't) against the stop-line / crosswalk / nearest-view-point order, and the immediate-hazard vehicle that was owed the yield."],watch:"“I stopped” is only half the section — stopping and then pulling out in front of an immediate hazard is still a violation of the yield half.",penalty:"No specific penalty stated in this section.",source:"https://alison.legislature.state.al.us/code-of-alabama?section=32-5A-112"},
+{name:"Move Over Act",cite:"Ala. Code § 32-5A-58.2",cat:"Serious & Roadside Safety",terms:["move over","john hubbard act","emergency vehicle roadside","slow down move over","58.2"],rule:"When a law enforcement or emergency vehicle using visual signals is parked, a wrecker with amber lights is working, a utility vehicle with lights is parked roadside working, a vehicle displaying flashing lights is parked or doing official duties (including maintenance, construction, or surveying) on or along a road, or a garbage/recycling truck is actively collecting — every other driver must, as soon as it is safe: on an interstate or highway with two or more lanes in their direction, vacate the lane closest to that vehicle (unless directed otherwise by an officer); if moving over is not safe, slow to at least 15 mph below the posted limit. On a two-lane road, move as far away as possible within the lane AND slow to 15 mph below the posted limit (limit 25 or more), or to 10 mph (limit 20 or less).",observe:["A covered vehicle or activity from the list in the rule, the driver's lane position and speed, and whether the move-over or the slow-down alternative was available and not taken."],watch:"“I slowed down a little” is not the standard — the fallback is at least 15 mph below the posted limit on multi-lane roads, and the exact two-lane speeds in the rule.",penalty:"Misdemeanor — $200 first violation, $250 second, $300 third or subsequent, plus on a third the court orders ALEA to suspend the driver's license for not less than 90 days. Minimum fine/sentence doubles if the driver was also violating DUI (§ 32-5A-191), reckless driving (§ 32-5A-190), construction-zone (§ 32-5A-176.1), wireless-device (§ 32-5A-350.1), or racing (§ 32-5A-178) law. Causing a collision with a covered vehicle: physical injury = Class A misdemeanor; serious physical injury = Class C felony; death = Class B felony.",source:"https://alison.legislature.state.al.us/code-of-alabama?section=32-5A-58.2"},
+{name:"Seat Belts",cite:"Ala. Code § 32-5B-4 (penalty § 32-5B-5)",cat:"Equipment & Occupants",terms:["seat belt","safety belt","no seatbelt","back seat belt","passenger belt"],rule:"In a passenger car (designed for 10 or fewer passengers, including vans; not a motorcycle, trailer, a vehicle the manufacturer did not equip with belts, or a school, church, day care, or mass-transit bus): every front seat occupant must wear a properly adjusted and fastened safety belt at all times while the vehicle is in motion, and every occupant younger than 15 must wear one in any seat. Under § 32-5B-4(f), no officer shall issue a citation for a violation of this section unless the officer has first stopped the vehicle for an alleged violation of another law.",observe:["Vehicle in motion on a public highway, road, or street; the occupant's seat position and age (front seat = any age; under 15 = any seat); belt not worn or not properly adjusted/fastened; and the separate stop for another alleged violation before a citation under this section."],watch:"Exemptions include: rural USPS letter carrier on duty; a child in a child restraint system under § 32-5-222; a mail or newspaper delivery driver in the regular course of employment; a person unable to wear a belt for medical reasons who has a physician's written documentation in their possession; an occupant whose work requires exiting and reentering more than eight times per mile, while doing that work. Failure to wear a belt is not evidence of contributory negligence, is not admissible in a civil action, and is not evidence of causation.",penalty:"A violation as provided in § 32-5-313 (dollar amount not stated in § 32-5B-5 itself). A conviction under this section cannot be used to suspend/revoke a license or to raise auto insurance premiums.",source:"https://alison.legislature.state.al.us/code-of-alabama?section=32-5B-4"}
+];
+var TCATS = ["All","Speed & Following","Lanes, Passing & Turning","Right-of-Way, Stops & Signals","Serious & Roadside Safety","Equipment & Occupants"];
+var tActiveCat = "All";
+var tListEl = document.getElementById('tlist');
+var tCountEl = document.getElementById('tcount');
+var tEmptyEl = document.getElementById('tempty');
+var tSearchEl = document.getElementById('tsearch');
+var tChipsEl = document.getElementById('tchips');
+function tHay(c){ return norm(c.name+" "+c.cite+" "+c.cat+" "+c.rule+" "+c.observe.join(" ")+" "+c.watch+" "+c.penalty+" "+c.terms.join(" ")); }
+function tMatches(c,q){
+  if(!q) return true;
+  var nq = norm(q); var hay = tHay(c);
+  if(hay.indexOf(nq)>-1) return true;
+  var toks = nq.split(" ").filter(function(t){return t.length>1;});
+  if(!toks.length) return true;
+  var hit=0; for(var j=0;j<toks.length;j++){ if(hay.indexOf(toks[j])>-1) hit++; }
+  return hit>=Math.max(1, Math.ceil(toks.length*0.6));
+}
+function renderTraffic(){
+  var q = tSearchEl.value.trim();
+  var shown = TRAFFIC_CARDS.filter(function(c){
+    if(tActiveCat!=="All" && c.cat!==tActiveCat) return false;
+    return tMatches(c,q);
+  });
+  tCountEl.textContent = shown.length + " of " + TRAFFIC_CARDS.length + " cards (pilot)";
+  tEmptyEl.style.display = shown.length ? "none" : "block";
+  var html = "";
+  shown.forEach(function(c){
+    html += '<details class="card">'
+      + '<summary>'
+      + '<div class="card-top"><span class="tag cat">'+esc(c.cat)+'</span><span class="tag">Alabama only</span><span class="tag">Title 32</span></div>'
+      + '<h3 class="case-name">'+esc(c.name)+'</h3>'
+      + '<p class="cite">'+esc(c.cite)+'</p>'
+      + '<p class="rule-preview"><strong>The Law:</strong> '+esc(c.rule)+'</p>'
+      + '<p class="expand-hint"><span class="open-txt">Tap to see What to observe / Watch out / Penalty ▾</span><span class="close-txt">Tap to collapse ▴</span></p>'
+      + '</summary>'
+      + '<div class="card-body">'
+      + '<h3>The Law</h3><p class="rule-big">'+esc(c.rule)+'</p>'
+      + '<h3 style="color:var(--can)">What you have to observe</h3><ul class="can">'
+      + c.observe.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")
+      + '</ul>'
+      + '<h3 style="color:var(--watch)">Watch out</h3><div class="watch-box"><p>'+esc(c.watch)+'</p></div>'
+      + '<h3>Penalty</h3><p>'+esc(c.penalty)+'</p>'
+      + '<h3>Official code</h3><a class="opinion-link" href="'+c.source+'" target="_blank" rel="noopener">Read the section on ALISON ↗</a>'
+      + '<div class="card-foot"><div>'+esc(TFOOTER)+'</div></div>'
+      + '</div></details>';
+  });
+  tListEl.innerHTML = html;
+}
+TCATS.forEach(function(cat){
+  var b=document.createElement('button');
+  b.type='button'; b.className='chip'; b.textContent=cat;
+  b.setAttribute('aria-pressed', cat==="All" ? "true":"false");
+  b.addEventListener('click',function(){
+    tActiveCat=cat;
+    var all=tChipsEl.querySelectorAll('.chip');
+    for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed', all[i].textContent===cat?"true":"false");
+    renderTraffic();
+  });
+  tChipsEl.appendChild(b);
+});
+tSearchEl.addEventListener('input', renderTraffic);
+renderTraffic();
+tListEl.addEventListener('click', function(ev){
+  var t = ev.target;
+  var a = t && t.closest ? t.closest('a.opinion-link') : null;
+  if(a && !navigator.onLine){
+    ev.preventDefault();
+    showToast('You’re offline — the official code needs signal. The card above still works from your saved copy.');
+    offlineBar.hidden = false;
+  }
+});
+
+/* Home switch: Case Law (default, nationwide) vs Traffic Law (Alabama default state) */
+var caseViewEl = document.getElementById('caseView');
+var trafficViewEl = document.getElementById('trafficView');
+var viewCaseBtn = document.getElementById('viewCaseBtn');
+var viewTrafficBtn = document.getElementById('viewTrafficBtn');
+function setView(which){
+  var traffic = (which==='traffic');
+  caseViewEl.hidden = traffic;
+  trafficViewEl.hidden = !traffic;
+  viewCaseBtn.setAttribute('aria-pressed', traffic ? 'false':'true');
+  viewTrafficBtn.setAttribute('aria-pressed', traffic ? 'true':'false');
+  window.scrollTo(0,0);
+}
+viewCaseBtn.addEventListener('click', function(){ setView('case'); });
+viewTrafficBtn.addEventListener('click', function(){ setView('traffic'); });
+try{ localStorage.setItem('trafficStateV1','AL'); }catch(e){}
+var changeStateBtn = document.getElementById('changeStateBtn');
+var statePickerEl = document.getElementById('statePicker');
+changeStateBtn.addEventListener('click', function(){
+  var open = statePickerEl.hidden;
+  statePickerEl.hidden = !open;
+  changeStateBtn.setAttribute('aria-expanded', open ? 'true':'false');
+});
+
 /* Disclaimer gate */
 var gate=document.getElementById('gate');
 var app=document.getElementById('app');
@@ -349,7 +508,7 @@ document.getElementById('acceptBtn').addEventListener('click',function(){
    where the worker's registration is still pending. Navigations are
    network-first in the worker, so an online open always picks up the
    newest published version. */
-var APP_CACHE = 'case-law-street-v10-2026-11-24';
+var APP_CACHE = 'case-law-street-v11-2026-11-24';
 var CORE_FILES = ['data:application/octet-stream;base64,eyJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBhMGQxMiIsImRlc2NyaXB0aW9uIjoiUXVpY2stcmVmZXJlbmNlIGNhc2UgbGF3IGNhcmRzIGZvciBvZmZpY2VycyDigJQgd29ya3Mgb2ZmbGluZSBvbmNlIG9wZW5lZC4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImljb25zIjpbeyJwdXJwb3NlIjoiYW55Iiwic2l6ZXMiOiIxOTJ4MTkyIiwic3JjIjoiaWNvbi0xOTIucG5nIiwidHlwZSI6ImltYWdlL3BuZyJ9LHsicHVycG9zZSI6ImFueSIsInNpemVzIjoiNTEyeDUxMiIsInNyYyI6Imljb24tNTEyLnBuZyIsInR5cGUiOiJpbWFnZS9wbmcifSx7InB1cnBvc2UiOiJtYXNrYWJsZSIsInNpemVzIjoiNTEyeDUxMiIsInNyYyI6Imljb24tbWFza2FibGUtNTEyLnBuZyIsInR5cGUiOiJpbWFnZS9wbmcifV0sImlkIjoiLi4vaW5kZXguaHRtbCIsIm5hbWUiOiJDYXNlIExhdyBmb3IgdGhlIFN0cmVldCIsIm9yaWVudGF0aW9uIjoicG9ydHJhaXQiLCJzY29wZSI6Ii4uLyIsInNob3J0X25hbWUiOiJDYXNlIExhdyIsInN0YXJ0X3VybCI6Ii4uL2luZGV4Lmh0bWwiLCJ0aGVtZV9jb2xvciI6IiMwYTBkMTIifQ==','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAEa0lEQVR4nO3dQVLbQBRFUZFiRBWTrCDrygKzrqwiUzJyBZQ22JbU/VvvnBkJ2Ipat7+AgJ9eXr+/LRDq2+gDgJEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQLTn0QeQ6vevPx/e/vHzZdCRZHvy8wB9rS/8NSH05Raoo68u/lvfh/0IgGgC6OSend0U6EcARBMA0QRANAF0cs+XN30ptB8BEE0AHd2ys9v9+/Kd4EFaX+p08fdnAgziYq9BAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQrexvhfALYs+l6i8BKDkBXPznU3VNSwYAvZQLoOpOwXYV13aKF8mrev+41dlfKK/iBb9WagK8P2HvL4YZTiQfzbKWpQKA3soE0NoxKu8cXDfTWpYJAEYoEcC1+8X125V2DtpmW8sSAcAoAiDa8AA+G5mtP68yOvnfjGs5PAAYaWgAt+wYrb+vsHPw0axraQIQbVgA9+wYrfcbvXPwz8xraQIQTQBEGxLAIyOz9f5ug8abfS1NAKJ1D2DLjtH6OFNgnDOspQlAtK4B7LFjtD7eFOjvLGtpAhCtWwB77hitxzEF+jnTWpoARBMA0boEcMTIbD2e26DjnW0tTQCiHR7AkTtG63FNgeOccS1NAKIdGkCPHaP1+KbA/s66liYA0Q4LoOeO0XoeU2A/Z15LE4BoAiDaIQGMGJmt53MbtN3Z19IEINruAYzcMVrPawo8LmEtTQCi7RpAhR2j9fymwP1S1tIEIJoAiLZbAJVG5oXboMckraUJQLRdAqi4Y1yYAvdJW0sTgGibA6i8Y1yYArdJXEsTgGhPL6/f3x794Jl30wo73Pr8jTym1LU0AYi2KYAKu+gjZj3uI816TrYe9/PoA6COxLV0C0S0zROg0idy18xwjBXMcJ72PkYTgGibA1gXWO3LaTPsalUkruXhPxQ/UpXjmFmVc1j6h+JbJY4+ca3nt/t/LW0tN30neO3aiep54VU4hltVvj2rcB57HMOuASzL17vFESdwxHPuoXIAy5KxlrsHsCz3jcxH/kFHP34v1QNYlvOv5SEBXIy8d6x4Ma3NEMDFWddy8zfCPnM58J4nr/JFNLOzruWhAVwc/QMpLvp+zraWXQJ4b49vtrjgazjDWnYPYG30CWA/M66l/wtENAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0QRANAEQTQBEEwDRBEA0ARBNAEQTANEEQDQBEE0ARBMA0Q59oezZjXxx6D3N+OJ1vZgARBMA0QRANJ8DEM0EIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKIJgGgCIJoAiCYAogmAaAIgmgCIJgCiCYBoAiCaAIgmAKL9BX0GruGevpfBAAAAAElFTkSuQmCC','data:image/png;base64,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AAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgfy7AAAgkCcAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACB/gdaWExju8RmkAAAAABJRU5ErkJggg==','data:image/png;base64,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QCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIH+B5RbRVl6xUkPAAAAAElFTkSuQmCC','data:application/javascript;base64,LyogQ2FzZSBMYXcgZm9yIHRoZSBTdHJlZXQg4oCUIG9mZmxpbmUgc2VydmljZSB3b3JrZXIgKHJldGFpbmVkIGNvcHkpCiAgIFRoZSBhdXRob3JpdGF0aXZlIHdvcmtlciBpcyBzdy5qcyBhdCB0aGUgYXBwIHJvb3QsIHJlZ2lzdGVyZWQgYnkKICAgaW5kZXguaHRtbDsgdGhpcyBhc3NldHMvIGNvcHkgaXMga2VwdCBvbmx5IHNvIHRoZSBwYWdlLXNpZGUgcHJlY2FjaGUKICAgbGlzdCBzdGF5cyB2YWxpZCwgYW5kIGlzIG5ldmVyIHJlZ2lzdGVyZWQgYXMgdGhlIHBhZ2UncyB3b3JrZXIuCiAgIFZlcnNpb25lZCBjYWNoZTogYnVtcCBDQUNIRV9OQU1FIG9uIGV2ZXJ5IHB1Ymxpc2hlZCB1cGRhdGUuCiAgIFRoZSBvbGQgY2FjaGUgaXMgZGVsZXRlZCBvbiBhY3RpdmF0aW9uLCBhbmQgbmF2aWdhdGlvbnMgYXJlCiAgIG5ldHdvcmstZmlyc3QsIHNvIGNvcnJlY3Rpb25zIGFuZCBuZXcgY2FyZHMgcmVhY2ggcGhvbmVzIG9uIHRoZQogICBuZXh0IG9ubGluZSBvcGVuIOKAlCBub2JvZHkgaXMgc3RyYW5kZWQgb24gYSBzdGFsZSBjb3B5LiBPZmZsaW5lLAogICB0aGUgY2FjaGVkIGNvcHkgaXMgc2VydmVkIGNhY2hlLWZpcnN0LiAqLwp2YXIgQ0FDSEVfTkFNRSA9ICdjYXNlLWxhdy1zdHJlZXQtdjUtMjAyNi0xMS0xNCc7CnZhciBDT1JFID0gWwogICcuLi9pbmRleC5odG1sJywKICAnLi4vJywKICAnLi9tYW5pZmVzdC53ZWJtYW5pZmVzdCcsCiAgJy4vaWNvbi0xOTIucG5nJywKICAnLi9pY29uLTUxMi5wbmcnLAogICcuL2ljb24tbWFza2FibGUtNTEyLnBuZycKXTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignaW5zdGFsbCcsIGZ1bmN0aW9uIChldmVudCkgewogIGV2ZW50LndhaXRVbnRpbCgKICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpLnRoZW4oZnVuY3Rpb24gKGNhY2hlKSB7CiAgICAgIHJldHVybiBjYWNoZS5hZGRBbGwoQ09SRSk7CiAgICB9KS50aGVuKGZ1bmN0aW9uICgpIHsgcmV0dXJuIHNlbGYuc2tpcFdhaXRpbmcoKTsgfSkKICApOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignYWN0aXZhdGUnLCBmdW5jdGlvbiAoZXZlbnQpIHsKICBldmVudC53YWl0VW50aWwoCiAgICBjYWNoZXMua2V5cygpLnRoZW4oZnVuY3Rpb24gKG5hbWVzKSB7CiAgICAgIHJldHVybiBQcm9taXNlLmFsbChuYW1lcy5tYXAoZnVuY3Rpb24gKG5hbWUpIHsKICAgICAgICBpZiAobmFtZSAhPT0gQ0FDSEVfTkFNRSkgcmV0dXJuIGNhY2hlcy5kZWxldGUobmFtZSk7CiAgICAgIH0pKTsKICAgIH0pLnRoZW4oZnVuY3Rpb24gKCkgeyByZXR1cm4gc2VsZi5jbGllbnRzLmNsYWltKCk7IH0pCiAgKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZnVuY3Rpb24gKGV2ZW50KSB7CiAgdmFyIHJlcSA9IGV2ZW50LnJlcXVlc3Q7CiAgaWYgKHJlcS5tZXRob2QgIT09ICdHRVQnKSByZXR1cm47CiAgdmFyIHVybCA9IG5ldyBVUkwocmVxLnVybCk7CiAgaWYgKHVybC5vcmlnaW4gIT09IHNlbGYubG9jYXRpb24ub3JpZ2luKSByZXR1cm47IC8vIENvcm5lbGwgZXRjLiBnbyB0byBuZXR3b3JrCgogIGlmIChyZXEubW9kZSA9PT0gJ25hdmlnYXRlJykgewogICAgLy8gTmV0d29yay1maXJzdCBmb3IgdGhlIHBhZ2UgaXRzZWxmOiBvbmxpbmUgb3BlbnMgYWx3YXlzIGdldCB0aGUKICAgIC8vIG5ld2VzdCBwdWJsaXNoZWQgdmVyc2lvbiBhbmQgcmVmcmVzaCB0aGUgY2FjaGU7IG9mZmxpbmUgb3BlbnMKICAgIC8vIGZhbGwgYmFjayB0byB0aGUgc2F2ZWQgY29weS4KICAgIGV2ZW50LnJlc3BvbmRXaXRoKAogICAgICBmZXRjaChyZXEpLnRoZW4oZnVuY3Rpb24gKHJlcykgewogICAgICAgIHZhciBjb3B5ID0gcmVzLmNsb25lKCk7CiAgICAgICAgY2FjaGVzLm9wZW4oQ0FDSEVfTkFNRSkudGhlbihmdW5jdGlvbiAoY2FjaGUpIHsgY2FjaGUucHV0KCcuLi9pbmRleC5odG1sJywgY29weSk7IH0pOwogICAgICAgIHJldHVybiByZXM7CiAgICAgIH0pLmNhdGNoKGZ1bmN0aW9uICgpIHsKICAgICAgICByZXR1cm4gY2FjaGVzLm1hdGNoKCcuLi9pbmRleC5odG1sJywgeyBpZ25vcmVTZWFyY2g6IHRydWUgfSkudGhlbihmdW5jdGlvbiAoaGl0KSB7CiAgICAgICAgICByZXR1cm4gaGl0IHx8IGNhY2hlcy5tYXRjaChyZXEsIHsgaWdub3JlU2VhcmNoOiB0cnVlIH0pOwogICAgICAgIH0pOwogICAgICB9KQogICAgKTsKICAgIHJldHVybjsKICB9CgogIC8vIFN0YXRpYyBhc3NldHMgKG1hbmlmZXN0LCBpY29ucyk6IGNhY2hlLWZpcnN0LCByZWZyZXNoIGluIGJhY2tncm91bmQuCiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2gocmVxLCB7IGlnbm9yZVNlYXJjaDogdHJ1ZSB9KS50aGVuKGZ1bmN0aW9uIChoaXQpIHsKICAgICAgdmFyIG5ldHdvcmsgPSBmZXRjaChyZXEpLnRoZW4oZnVuY3Rpb24gKHJlcykgewogICAgICAgIGlmIChyZXMgJiYgcmVzLnN0YXR1cyA9PT0gMjAwKSB7CiAgICAgICAgICB2YXIgY29weSA9IHJlcy5jbG9uZSgpOwogICAgICAgICAgY2FjaGVzLm9wZW4oQ0FDSEVfTkFNRSkudGhlbihmdW5jdGlvbiAoY2FjaGUpIHsgY2FjaGUucHV0KHJlcSwgY29weSk7IH0pOwogICAgICAgIH0KICAgICAgICByZXR1cm4gcmVzOwogICAgICB9KS5jYXRjaChmdW5jdGlvbiAoKSB7IHJldHVybiBoaXQ7IH0pOwogICAgICByZXR1cm4gaGl0IHx8IG5ldHdvcms7CiAgICB9KQogICk7Cn0pOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdtZXNzYWdlJywgZnVuY3Rpb24gKGV2ZW50KSB7CiAgaWYgKGV2ZW50LmRhdGEgJiYgZXZlbnQuZGF0YS50eXBlID09PSAnU0tJUF9XQUlUSU5HJykgc2VsZi5za2lwV2FpdGluZygpOwp9KTsK'];
 var offlineBar = document.getElementById('offlineBar');
 var toastEl = document.getElementById('toast');
